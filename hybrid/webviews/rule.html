@@ -1,0 +1,62 @@
+<!DOCTYPE>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<title>无标题文档</title>
+<style>
+	*{box-sizing: border-box; -webkit-box-sizing: border-box; -o-box-sizing: border-box; -moz-box-sizing: border-box;}
+	body,h2,h4,p{padding:0px;  margin:0px; font-weight:normal; font-size:inherit;}
+	h2{width:100%;height:45px; line-height:45px;  font-size:16px; background:#f9f8f8;padding:0 18px;}
+	h4{height:40px; line-height:40px; font-size:14px; display: block; float:left;}
+	body {counter-reset:section;}
+	ol {counter-reset:subsection; width:100%; }
+	li{width:100%; padding-right:20px; width:100%; list-style:none;}
+	ol li:before {
+		counter-increment:subsection;
+		content:counter(subsection)"."; 
+		width: 1.2em;
+		margin-left: -1.2em;
+		display: block;
+		float:left;
+		height:40px; 
+		line-height:40px; 
+	}
+	p{width:100%; font-size:12px; line-height:18px; clear:left;}
+	img{width:100%; height:auto; max-width:600px; padding:0 10px; padding-left:0px; display:block; clear:left;}
+</style>
+</head>
+
+<body>
+<section>
+	<h2>超卡升级规则</h2>
+	<ol>
+		<li>
+			<h4>超卡等级划分</h4>
+			<img src="img/rule/levelLine.png" />
+		</li>
+		<li>
+			<h4>如何升级</h4>
+			<p>没充值1元可获得1成长值，累积成长值达到各VIP成长值，即可升级到该VIP等级；成长值为累加值，不会消耗，不会减少。</p>
+		</li>
+	</ol>
+</section>
+<section>
+	<h2>积分获取规则</h2>
+	<ol>
+		<li>
+			<h4>不同VIP等级消费可获取的积分比</h4>
+			<img src="img/rule/jifenLine.png" />
+		</li>
+		<li>
+			<h4>积分获得</h4>
+			<p>不同VIP等级进行等额消费可获得不同的积分，如上图VIP5消费1元，可获得1.4积分；后续将开通更多积分获得方式。</p>
+		</li>
+		<li>
+			<h4>积分使用</h4>
+			<p>积分可兑换超币</p>
+		</li>
+	</ol>
+</section>
+</body>
+</html>

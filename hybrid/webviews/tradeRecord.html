@@ -1,0 +1,104 @@
+<!DOCTYPE>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<title>交易记录</title>
+<link rel="stylesheet" href="css/common.css" />
+</head>
+
+<body>
+<div class='tradeRecords j-tradeRecords'>
+		
+</div>
+
+
+
+<script id="js-tradeRecords" type="text/template">
+	<%if(tradeRecords.length ==0){%>
+		 <header>
+			<h5>本月交易记录</h5>
+			<span>当前余额:0</span>
+		</header>
+		<p>您还没产生过任何交易数据</p>
+	<%}else{%>
+		 <%_.each(tradeRecords, function(item,index) {%>
+			<header>
+				<h5><%=item.month%>交易记录</h5>
+				<i class='floatR j-open'></i>
+				<%if(0 == index){%>
+					<span>当前余额:<%=item.balance/100.0%></span>
+				<%}%>
+			</header>
+				<ul	class='monthTradeRecords'>
+						<%if(item.records.length!=0 &&item.records[0] ){%>
+							<%_.each(item.records, function(record) {%>
+								<li class="tradeRecordDetail">
+									<%if(record.type == 'RECHARGE'){%>
+										<div class='income'>
+											<h5 class='tradeName floatL'>超币充值</h5>
+											<span class="payWay">(<%=record.getRenderRechargeType()%>)</span>
+											<span class='tradeMoneyNumber floatR'>+<%=record.rechargeFee/100.0%></span>
+										</div>
+									<%}else {%>
+										<div class='outlay'>
+											<h5 class='tradeName floatL'><%=record.shopName%></h5>
+											<span class='tradeMoneyNumber floatR'>-<%=record.totalFee/100.0%></span>
+										</div>
+									<%}%>
+									<div >
+										<time class='tradeTime floatL'><%=record.createTime%></time>
+										<span class="currentCountMoney floatR">余额 : <%=record.balance/100.0%></span>
+									</div>
+								</li>
+							<%});%>
+						<%}%>
+				</ul>
+			
+		<%});%>
+	<%}%>
+</script>
+<script src="js/jquery.js"></script>
+<script src="js/fastclick.js"></script>
+<script src="js/underscore.min.js"></script>
+<script src="js/tradeRecord.js"></script>
+<script>
+    var url = ['url(image/tradeRecord/downArrow.png)','url(image/tradeRecord/downArrow.png)'];
+    var urlindex = 0;
+    var bridge;
+    
+    $(document).on('click',".j-tradeRecords header",function(){
+        $(this).next('ul').slideToggle();
+        /*var currentUrl = $(this).find('i').css('background-image').split('/').pop();
+        urlindex = currentUrl == 'showRecordIcon.png)'?1:0;
+        $(this).find('i').css({'background-image':url[urlindex]},{'background-size':'100% 100%'})*/
+		var arrow = $(this).find('i');
+		arrow.toggleClass("j-open");
+		if(arrow.hasClass("j-open")){
+			arrow.css("animation","rotateToUp 0.5s");
+		}else{
+			arrow.css("animation","rotateToDown 0.5s");
+		}
+		arrow.css("animation-fill-mode","forwards");
+                   bridge.callHandler('fuck', "fuck whom?", function(response) {});
+    });
+    
+    $(function(){
+        FastClick.attach(document.body);
+    });
+    
+    document.addEventListener('WebViewJavascriptBridgeReady', onBridgeReady, false);
+    function onBridgeReady(event) {
+        bridge = event.bridge;
+        bridge.init(function(message, responseCallback) {
+                    });
+        bridge.registerHandler('setTradeRecords', function(data, responseCallback) {
+                               alert("setTradeRecords");
+                               setTradeRecords(data);
+       })
+    }
+</script>
+</body>
+</html>
+
+

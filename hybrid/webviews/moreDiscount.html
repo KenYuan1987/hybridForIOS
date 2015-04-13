@@ -1,0 +1,68 @@
+<!DOCTYPE>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<title>交易记录</title>
+<link rel="stylesheet" href="css/common.css"/>
+<style>
+	header{
+		webkit-box-sizing: border-box;
+		-moz-box-sizing: border-box;
+		box-sizing: border-box;	
+		display:inline-block;
+		width:100%;
+		height:auto;
+		padding:8px 30px;
+		background:#ff6c00;
+		padding-bottom:30px;
+		padding-right:10px;
+	}
+	header img , header div{ float:left;}
+	header img{ width:80px; margin-right:13px;}
+	header div{ display:inline-block; width:auto; width: calc(100% - 95px); width:-moz-calc(100% - 95px); width:-webkit-calc(100% - 95px);  height:auto; padding-top:5px; color:white;}
+    header div p:first-child{ height:30px; line-height:30px; font-size:15px;text-overflow:ellipsis;white-space: nowrap;overflow: hidden;}
+	header div p:last-child{ font-size:10px;}
+</style>
+</head>
+
+<body>
+<header class='storeInformation js-moreDiscount-storeInformation'>
+	
+</header>
+
+<div class='listth'>
+	<span class="floatL">超卡等级</span>
+	<span class="floatR">可享折扣</span>
+</div>
+<ul class="discountLevel js-moreDiscount-discountLevel"></ul>
+<script id="moreDiscount-storeInformation" type="text/template">
+		<img src=<%=storeInformation.imageUrl%>>
+		<div>
+			<p><%=storeInformation.name%></p>
+			<p><%=storeInformation.address%></p>
+		</div>
+
+</script>
+<script id="moreDiscount-discountLevel" type="text/template">
+	<%_.each(global.discountLevel, function(item) {%>
+		<li class="discountDetail">
+			<span class="floatL"><img src=<%=item.url%>><p><%=item.name%></p></span>
+			<span class="floatR"><%=item.discount%>折</span>
+		</li>
+	<%});%>
+</script>
+<script src="js/jquery.js"></script>
+<script src="js/underscore.min.js"></script>
+<script src="js/morDiscount.js"></script>
+<script>
+    window.onerror = function(errorMessage, scriptURI, lineNumber,columnNumber,errorObj) {
+        console.log("错误信息：" , errorMessage);
+        console.log("出错文件：" , scriptURI);
+        console.log("出错行号：" , lineNumber);
+        console.log("出错列号：" , columnNumber);
+        console.log("错误详情：" , errorObj);
+    }
+</script>
+</body>
+</html>
