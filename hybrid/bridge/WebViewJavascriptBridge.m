@@ -175,7 +175,15 @@ static bool logging = false;
             }
             
             @try {
-                NSDictionary* data = message[@"data"];
+                id data = message[@"data"];
+                if ([data isKindOfClass:[NSString class]]) {
+                    NSString *dataStr = data;
+                    NSError *err;
+                    id dataJsonObj = [NSJSONSerialization JSONObjectWithData:[dataStr dataUsingEncoding:NSUTF8StringEncoding] options:0 error:&err];
+                    if (!err) {
+                        data = dataJsonObj;
+                    }
+                }
                 if (!data || ((id)data) == [NSNull null]) { data = [NSDictionary dictionary]; }
                 handler(data, responseCallback);
             }
@@ -328,6 +336,7 @@ static bool logging = false;
         NSString *filePath = [[NSBundle mainBundle] pathForResource:@"WebViewJavascriptBridge.js" ofType:@"txt"];
         NSString *js = [NSString stringWithContentsOfFile:filePath encoding:NSUTF8StringEncoding error:nil];
         [webView stringByEvaluatingJavaScriptFromString:js];
+        self.isReady = YES;
     }
     
     if (_startupMessageQueue) {

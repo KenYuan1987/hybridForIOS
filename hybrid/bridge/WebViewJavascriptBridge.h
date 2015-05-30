@@ -29,6 +29,7 @@ typedef void (^WVJBHandler)(id data, WVJBResponseCallback responseCallback);
 
 @interface WebViewJavascriptBridge : WVJB_WEBVIEW_DELEGATE_TYPE
 @property(nonatomic,weak) WVJB_WEBVIEW_DELEGATE_TYPE* webViewDelegate;
+@property(nonatomic,assign) BOOL isReady;
 + (instancetype)bridgeForWebView:(WVJB_WEBVIEW_TYPE*)webView handler:(WVJBHandler)handler;
 + (instancetype)bridgeForWebView:(WVJB_WEBVIEW_TYPE*)webView webViewDelegate:(WVJB_WEBVIEW_DELEGATE_TYPE*)webViewDelegate handler:(WVJBHandler)handler;
 + (void)enableLogging;
