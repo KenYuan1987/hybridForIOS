@@ -34,6 +34,7 @@
 -(void)initialize{
     self.bridge = [WebViewJavascriptBridge bridgeForWebView:self handler:^(id data, WVJBResponseCallback responseCallback) {
     }];
+    self.scrollView.decelerationRate = UIScrollViewDecelerationRateNormal;
 }
 
 -(void)callJsMethod:(NSString *)method{
