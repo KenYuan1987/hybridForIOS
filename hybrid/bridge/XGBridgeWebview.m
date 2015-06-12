@@ -35,40 +35,30 @@
     self.bridge = [WebViewJavascriptBridge bridgeForWebView:self handler:^(id data, WVJBResponseCallback responseCallback) {
     }];
     self.scrollView.decelerationRate = UIScrollViewDecelerationRateNormal;
+    self.suppressesIncrementalRendering = YES;
 }
 
 -(void)callJsMethod:(NSString *)method{
-    if(!self.bridge.isReady){
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            [self callJsMethod:method];
-        });
-    }else{
-        [self.bridge callHandler:method];
-    }
+    //    if(!self.bridge.isReady){
+    //        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+    //            [self callJsMethod:method];
+    //        });
+    //    }else{
+    //        [self.bridge callHandler:method];
+    //    }
+    [self.bridge callHandler:method];
 }
 
 -(void)callJsMethod:(NSString *)method withParams:(id)params{
-    if(!self.bridge.isReady){
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            [self callJsMethod:method withParams:params];
-        });
-    }else{
-        [self.bridge callHandler:method data:params];
-    }
+    [self.bridge callHandler:method data:params];
 }
 
 -(void)callJsMethod:(NSString *)method withParams:(id)params withResponse:(ResponseFromJs)response{
-    if(!self.bridge.isReady){
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            [self callJsMethod:method withParams:params withResponse:response];
-        });
-    }else{
-        [self.bridge callHandler:method data:params responseCallback:^(id responseData) {
-            if (response) {
-                response(responseData);
-            }
-        }];
-    }
+    [self.bridge callHandler:method data:params responseCallback:^(id responseData) {
+        if (response) {
+            response(responseData);
+        }
+    }];
 }
 
 -(void)addTarget:(id)target actionCallFromJs:(SEL)action{
